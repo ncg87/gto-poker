@@ -1,5 +1,4 @@
 use thiserror::Error;
-use std::collections::HashSet;
 // Enumeration similar to C
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] // Rust attribute, implements trats in the struct/enum following it
 // Suit class, enumerated since there are only 4 suits
@@ -11,12 +10,15 @@ pub enum Suit {
 }
 
 
-// Attribute, Debug: allows for the structure to be printed just println!({:?}, variable) (anything with ! is a macro)
-//            Clone:
-//            Copy:
-//            PartialEq:
-//            Eq:
-//            Hash: 
+// Note: variables can only be assigned using let or if in a structure
+
+// Attribute, Debug: allows for the structure to be printed just println!({:?}, variable) (anything with ! is a macro), easier to debug
+//            Clone: allows for a clone/deep copy to be made, with .clone
+//            Copy: allows for implcit copyies, x = y, assigning this cariable to another using let
+// Note: ^^^ Clone and copy are the same just clone is explicit and copy is implicit
+//            PartialEq: allows for the == to work
+//            Eq: make equality reflexive so a==b then b==a
+//            Hash: allows the type to be used in hash tables
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 // Card class, each card has a suit and a ranks defined by a u8, unsigned 8-bit integer
 pub struct Card {
@@ -35,7 +37,7 @@ impl Card {
         // If the card is valid return the card, last expression in a function is implictly returned
         Ok(Card { suit, rank }) // Implicitly returned
     }
-    // Returns the suit
+    // Returns the suit, read only function, if returning the action var.suit then it would be slower and adjustable
     pub fn suit(&self) -> Suit {
         self.suit
     }

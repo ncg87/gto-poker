@@ -7,13 +7,15 @@ mod deck_tests {
 
     #[test]
     fn test_new_deck() {
-        let deck = Deck::new().unwrap();
+        let mut deck = Deck::new().unwrap();
+        deck.initialize_and_shuffle().unwrap();
         assert_eq!(deck.remaining(), 52);
     }
 
     #[test]
     fn test_draw_card() {
         let mut deck = Deck::new().unwrap();
+        deck.initialize_and_shuffle().unwrap();
         let card = deck.draw().unwrap();
         assert_eq!(deck.remaining(), 51);
         assert!(card.rank() >= 2 && card.rank() <= 14);
@@ -22,6 +24,7 @@ mod deck_tests {
     #[test]
     fn test_draw_all_cards() {
         let mut deck = Deck::new().unwrap();
+        deck.initialize_and_shuffle().unwrap();
         for _ in 0..52 {
             deck.draw().unwrap();
         }
@@ -33,6 +36,8 @@ mod deck_tests {
     fn test_shuffle() {
         let mut deck1 = Deck::new().unwrap();
         let mut deck2 = Deck::new().unwrap();
+        deck1.initialize_and_shuffle().unwrap();
+        deck2.initialize_and_shuffle().unwrap();
 
         // Store the first few cards of deck1
         let first_cards: Vec<Card> = (0..5).map(|_| deck1.draw().unwrap()).collect();
@@ -50,6 +55,7 @@ mod deck_tests {
     #[test]
     fn test_remaining_cards() {
         let mut deck = Deck::new().unwrap();
+        deck.initialize_and_shuffle().unwrap();
         assert_eq!(deck.remaining(), 52);
 
         for i in (1..=52).rev() {
@@ -61,6 +67,7 @@ mod deck_tests {
     #[test]
     fn test_initialize_with_all_cards() {
         let mut deck = Deck::new().unwrap();
+        deck.initialize_and_shuffle().unwrap();
         let mut card_counts = std::collections::HashMap::new();
 
         for _ in 0..52 {
