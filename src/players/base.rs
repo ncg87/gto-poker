@@ -35,6 +35,11 @@ pub trait PlayerFunctions {
 
 }
 
+pub struct InstanceInfo {
+    cards: Vec<Card>,
+    current_bet: u32,
+}
+
 #[derive(Debug, Error)]
 pub enum PlayerError {
     PlayerError,

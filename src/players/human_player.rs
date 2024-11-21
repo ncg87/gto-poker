@@ -66,6 +66,7 @@ impl PlayerFunctions for HumanPlayer {
 }
 
 impl HumanPlayer {
+    // Allocates the structure to the heap
     pub fn new(name: String, chips: u32) -> HumanPlayer {
         HumanPlayer { name, hand: Vec::new(), chips, bet_in_round: 0 }
     }
